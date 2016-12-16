@@ -1,4 +1,4 @@
-A web app for Green Beret to track their repair department.  
+A web app built for Green Beret to track their repair department.  
 Built with Node.js, MongoDB, Angular, and Express.
 
 **SET UP:**
