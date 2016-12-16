@@ -1,0 +1,81 @@
+<!doctype html>
+<html ng-app="gbTicket">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Repair Tracker</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ }
+		p 						{ font-size: 16px;}
+		.field-name 	{ font-size: 16px; padding-top: 15px;}
+		.title 				{ font-size: 24px; width: 100%; background-color: #EBEEF0; padding-top: 10px;  padding-bottom: 20px;}
+
+
+		#ticket-list 				{ margin-bottom:50px; font-size: 20px; padding-left: 10%; padding-right: 10%; border-style: solid; border-radius: 10px; border-color: #4CAF50;}
+		#ticket-form 	 			{ margin-bottom:20px; }
+	</style>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="js/controllers/main.js"></script>
+	<script src="js/services/tickets.js"></script>
+	<script src="js/core.js"></script>
+
+</head>
+
+<body ng-controller="mainController">
+	<div class="container">
+<!-- title -->
+		<div class="title text-center">
+			<h1>Green Beret Repair Tracker</h1>
+			<h2>Pending repairs: <span class="label label-info">{{ tickets.length }}</span></h2>
+		</div>
+
+<!-- add new ticket -->
+		<div id="ticket-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group" style="display: inline-block">
+						<label class="field-name">Ticket Number </label>
+						<input type="number" class="form-control input-lg text-center" placeholder="....." ng-model="formData.text">
+
+						<label class="field-name">Customer Name </label>
+						<input type="text" class="form-control input-lg text-center" placeholder="....." ng-model="formData.name">
+
+						<!-- <div class="form-group row"> -->
+						  <label class="field-name">Date Received</label>
+						    <input class="form-control input-lg text-center" type="date" value="2017-01-01" ng-model="formData.date">
+						<!-- <div class="form-group">
+							<label for="text-area" class="field-name">Repair summary, notes, and updates.</label>
+							<textarea class="form-control" id="text-area" rows="3"></textarea>
+						</div> -->
+
+						<button type="submit" class="btn btn-primary btn-lg" ng-click="createTickets()">Add</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+<!-- ticket list -->
+		<div id="ticket-list" class="row">
+			<div class="col-sm-8">
+				<div class="checkbox" ng-repeat="ticket in tickets">
+						<!-- <input type="checkbox" ng-click="deleteTicket(ticket._id)"> {{ ticket.text }} - {{ ticket.name }} -->
+						<input type="checkbox" ng-click="deleteTicket(ticket._id)"> Order # {{ ticket.text }} - {{ ticket.name }} - {{ ticket.date }}
+				</div>
+
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
